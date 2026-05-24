@@ -25,9 +25,7 @@ namespace Catalog.Infrastructure.Data.Contexts
             var productTypeData = await File.ReadAllTextAsync(filePath);
             var productTypes = JsonSerializer.Deserialize<List<ProductType>>(productTypeData);
             if (productTypes!.Any() is true)
-            {
                 await productTypeCollection.InsertManyAsync(productTypes);
-            }
         }
     }
 }
