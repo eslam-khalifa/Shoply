@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Catalog.Application.Responses
 {
-    public class ProductBrandResponseDto
+    public class ProductTypeResponseDto
     {
         [BsonId]
         [BsonRepresentation(MongoDB.Bson.BsonType.ObjectId)]

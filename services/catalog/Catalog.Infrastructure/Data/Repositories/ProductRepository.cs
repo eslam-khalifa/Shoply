@@ -32,6 +32,8 @@ namespace Catalog.Infrastructure.Data.Repositories
             return deleteProductResult.IsAcknowledged && deleteProductResult.DeletedCount > 0;
         }
 
+        // repsoitories returns ienumerable because it is a type of abstraction and flexibility
+        // any preprocessing method should return ienumerable
         public async Task<IEnumerable<Product>> GetAllAsync()
         {
             return await catalogContext.Products.Find(_ => true).ToListAsync();
