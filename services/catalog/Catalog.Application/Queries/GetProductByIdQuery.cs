@@ -11,10 +11,5 @@ namespace Catalog.Application.Queries
     public class GetProductByIdQuery : IRequest<ProductResponseDto>
     {
         public string id { get; }
-
-        public GetProductByIdQuery(string id)
-        {
-            this.id = id;
-        }
     }
 }

@@ -11,10 +11,5 @@ namespace Catalog.Application.Queries
     public class GetAllProductsByBrandNameQuery : IRequest<IList<ProductResponseDto>>
     {
         public string Name { get; }
-
-        public GetAllProductsByBrandNameQuery(string Name)
-        {
-            this.Name = Name;
-        }
     }
 }
