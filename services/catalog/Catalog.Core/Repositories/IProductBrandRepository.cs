@@ -9,6 +9,6 @@ namespace Catalog.Core.Repositories
 {
     public interface IProductBrandRepository
     {
-        Task<IEnumerable<ProductBrand>> GetAll();
+        Task<IEnumerable<ProductBrand>> GetAllAsync();
     }
 }
