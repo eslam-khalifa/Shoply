@@ -22,7 +22,7 @@ namespace Catalog.Infrastructure.Data.Contexts
             var hasProductBrands = await productBrandCollection.Find(_ => true).AnyAsync();
             if (hasProductBrands)
                 return;
-            var filePath = Path.Combine("Data", "SeededData", "brands.json");
+            var filePath = Path.Combine(AppContext.BaseDirectory, "Data", "SeededData", "brands.json");
             if (!File.Exists(filePath))
             {
                 Console.WriteLine($"File {filePath} does not exist.");

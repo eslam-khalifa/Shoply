@@ -16,7 +16,7 @@ namespace Catalog.Infrastructure.Data.Contexts
             var hasProducts = await productCollection.Find(_ => true).AnyAsync();
             if (hasProducts)
                 return;
-            var filePath = Path.Combine("Data", "SeededData", "products.json");
+            var filePath = Path.Combine(AppContext.BaseDirectory, "Data", "SeededData", "products.json");
             if (!File.Exists(filePath))
             {
                 Console.WriteLine($"File {filePath} does not exist.");

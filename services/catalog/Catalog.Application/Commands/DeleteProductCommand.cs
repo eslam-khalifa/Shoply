@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Catalog.Application.Commands
 {
-    public class DeleteProductCommand : IRequest<bool>
+    public class DeleteProductCommand : IRequest<bool?>
     {
         public string Id { get; set; }
     }

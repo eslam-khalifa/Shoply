@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Catalog.Application.Handlers.Commands
 {
-    public class DeleteProductCommandHandler : IRequestHandler<DeleteProductCommand, bool>
+    public class DeleteProductCommandHandler : IRequestHandler<DeleteProductCommand, bool?>
     {
         private readonly IProductRepository productRepository;
 
@@ -18,7 +18,7 @@ namespace Catalog.Application.Handlers.Commands
             this.productRepository = productRepository;
         }
 
-        public async Task<bool> Handle(DeleteProductCommand request, CancellationToken cancellationToken)
+        public async Task<bool?> Handle(DeleteProductCommand request, CancellationToken cancellationToken)
         {
             var isProductDeleted = await productRepository.DeleteAsync(request.Id);
             return isProductDeleted;

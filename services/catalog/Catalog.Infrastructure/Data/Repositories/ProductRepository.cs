@@ -1,6 +1,7 @@
 ﻿using Catalog.Core.Entities;
 using Catalog.Core.Repositories;
 using Catalog.Infrastructure.Data.Contexts;
+using MongoDB.Bson;
 using MongoDB.Driver;
 using System;
 using System.Collections.Generic;
@@ -25,8 +26,10 @@ namespace Catalog.Infrastructure.Data.Repositories
             return product;
         }
 
-        public async Task<bool> DeleteAsync(string id)
+        public async Task<bool?> DeleteAsync(string id)
         {
+            if (!ObjectId.TryParse(id, out _))
+                return null;
             var deleteProductResult = await catalogContext.Products.DeleteOneAsync(p => p.Id == id);
             // is acknowledged means that mongodb understood the delete command and processed it
             return deleteProductResult.IsAcknowledged && deleteProductResult.DeletedCount > 0;
@@ -49,13 +52,17 @@ namespace Catalog.Infrastructure.Data.Repositories
             return await catalogContext.Products.Find(p => p.Name == name).ToListAsync();
         }
 
-        public async Task<Product> GetByIdAsync(string id)
+        public async Task<Product?> GetByIdAsync(string id)
         {
+            if (!ObjectId.TryParse(id, out _))
+                return null;
             return await catalogContext.Products.Find(p => p.Id == id).FirstOrDefaultAsync();
         }
 
-        public async Task<bool> UpdateAsync(Product product)
+        public async Task<bool?> UpdateAsync(Product product)
         {
+            if (!ObjectId.TryParse(product.Id, out _))
+                return null;
             var updateProductResult = await catalogContext.Products.ReplaceOneAsync(p => p.Id == product.Id, product);
             return updateProductResult.IsAcknowledged && updateProductResult.ModifiedCount > 0;
         }

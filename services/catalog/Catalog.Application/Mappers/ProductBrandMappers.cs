@@ -10,8 +10,11 @@ namespace Catalog.Application.Mappers
 {
     public static class ProductBrandMappers
     {
-        public static ProductBrandResponseDto ToProductBrandResponseDto(this ProductBrand productBrand)
+        public static ProductBrandResponseDto? ToProductBrandResponseDto(this ProductBrand productBrand)
         {
+            if (productBrand is null)
+                return null;
+
             return new ProductBrandResponseDto
             {
                 Id = productBrand.Id,

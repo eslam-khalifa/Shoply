@@ -10,8 +10,11 @@ namespace Catalog.Application.Mappers
 {
     public static class ProductTypesMappers
     {
-        public static ProductTypeResponseDto ToProductTypeResponseDto(this ProductType productType)
+        public static ProductTypeResponseDto? ToProductTypeResponseDto(this ProductType productType)
         {
+            if (productType is null)
+                return null;
+
             return new ProductTypeResponseDto
             {
                 Id = productType.Id,

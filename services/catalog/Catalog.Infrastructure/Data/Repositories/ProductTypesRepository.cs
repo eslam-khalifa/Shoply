@@ -10,11 +10,11 @@ using System.Threading.Tasks;
 
 namespace Catalog.Infrastructure.Data.Repositories
 {
-    internal class ProductTypesRepository : IProductTypeRepository
+    public class ProductTypeRepository : IProductTypeRepository
     {
         private readonly ICatalogContext catalogContext;
 
-        public ProductTypesRepository(ICatalogContext catalogContext)
+        public ProductTypeRepository(ICatalogContext catalogContext)
         {
             this.catalogContext = catalogContext;
         }

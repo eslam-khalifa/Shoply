@@ -11,8 +11,11 @@ namespace Catalog.Application.Mappers
 {
     public static class ProductMappers
     {
-        public static ProductResponseDto ToProductResponseDto(this Product product)
+        public static ProductResponseDto? ToProductResponseDto(this Product product)
         {
+            if (product is null)
+                return null;
+
             return new ProductResponseDto
             {
                 Id = product.Id,
@@ -26,8 +29,11 @@ namespace Catalog.Application.Mappers
             };
         }
 
-        public static Product ToProduct(this CreateProductCommand createProductCommandtDto)
+        public static Product? ToProduct(this CreateProductCommand createProductCommandtDto)
         {
+            if (createProductCommandtDto is null)
+                return null;
+
             return new Product
             {
                 Name = createProductCommandtDto.Name,
@@ -40,8 +46,11 @@ namespace Catalog.Application.Mappers
             };
         }
 
-        public static Product ToProduct(this UpdateProductCommand updateProductCommandtDto)
+        public static Product? ToProduct(this UpdateProductCommand updateProductCommandtDto)
         {
+            if (updateProductCommandtDto is null)
+                return null;
+
             return new Product
             {
                 Id = updateProductCommandtDto.Id,

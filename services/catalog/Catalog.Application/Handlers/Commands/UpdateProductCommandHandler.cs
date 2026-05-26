@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace Catalog.Application.Handlers.Commands
 {
-    public class UpdateProductCommandHandler : IRequestHandler<UpdateProductCommand, bool>
+    public class UpdateProductCommandHandler : IRequestHandler<UpdateProductCommand, bool?>
     {
         private readonly IProductRepository productRepository;
 
@@ -20,7 +20,7 @@ namespace Catalog.Application.Handlers.Commands
             this.productRepository = productRepository;
         }
 
-        public async Task<bool> Handle(UpdateProductCommand request, CancellationToken cancellationToken)
+        public async Task<bool?> Handle(UpdateProductCommand request, CancellationToken cancellationToken)
         {
             var productFromCommand = request.ToProduct();
             var isProductUpdated = await productRepository.UpdateAsync(productFromCommand);

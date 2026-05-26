@@ -1,4 +1,10 @@
 
+using Catalog.Application.Queries;
+using Catalog.Core.Repositories;
+using Catalog.Infrastructure.Data.Contexts;
+using Catalog.Infrastructure.Data.Repositories;
+using System.Reflection;
+
 namespace Catalog.API
 {
     public class Program
@@ -10,6 +16,25 @@ namespace Catalog.API
             // Add services to the container.
 
             builder.Services.AddControllers();
+
+            // u have to register the assembly by only passing a query or command that is in the assembly u want to register
+            builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblies(
+                Assembly.GetExecutingAssembly(),
+                Assembly.GetAssembly(typeof(GetProductByIdQuery))));
+
+            builder.Services.AddScoped<ICatalogContext, CatalogContext>();
+
+            builder.Services.AddScoped<IProductRepository, ProductRepository>();
+            builder.Services.AddScoped<IProductBrandRepository, ProductBrandRepository>();
+            builder.Services.AddScoped<IProductTypeRepository, ProductTypeRepository>();
+
+            builder.Services.AddApiVersioning(options =>
+            {
+                options.ReportApiVersions = true;
+                options.AssumeDefaultVersionWhenUnspecified = true;
+                options.DefaultApiVersion = new Asp.Versioning.ApiVersion(1, 0);
+            });
+
             // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
             builder.Services.AddSwaggerGen((options) =>
             {
@@ -26,6 +51,7 @@ namespace Catalog.API
                     }
                 });
             });
+
             builder.Services.AddOpenApi();
 
             var app = builder.Build();
