@@ -18,7 +18,7 @@ namespace Catalog.API.Controllers
         }
 
         [HttpGet]
-        [Route("[action]/{Id}", Name = "GetProductById")]
+        [Route("[action]/{id}", Name = "GetProductById")]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(ProductResponseDto))]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<ActionResult<ProductResponseDto>> GetProductById(string id)

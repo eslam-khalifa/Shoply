@@ -22,7 +22,9 @@ namespace Catalog.API
                 Assembly.GetExecutingAssembly(),
                 Assembly.GetAssembly(typeof(GetProductByIdQuery))));
 
-            builder.Services.AddScoped<ICatalogContext, CatalogContext>();
+            // make it singleton because if it is scoped, the object will not be created until sending a request
+            // not creating an object, means not checking if there is data seeded yet or not
+            builder.Services.AddSingleton<ICatalogContext, CatalogContext>();
 
             builder.Services.AddScoped<IProductRepository, ProductRepository>();
             builder.Services.AddScoped<IProductBrandRepository, ProductBrandRepository>();
