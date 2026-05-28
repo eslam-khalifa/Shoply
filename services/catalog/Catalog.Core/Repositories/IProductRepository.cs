@@ -10,7 +10,7 @@ namespace Catalog.Core.Repositories
 {
     public interface IProductRepository
     {
-        Task<IEnumerable<Product>> GetAllAsync();
+        Task<PagedResult<Product>> GetAllAsync(CatalogSpecParams catalogSpecParams);
         Task<Product?> GetByIdAsync(string id);
         Task<IEnumerable<Product>> GetAllByNameAsync(string name);
         Task<IEnumerable<Product>> GetAllByBrandNameAsync(string name);

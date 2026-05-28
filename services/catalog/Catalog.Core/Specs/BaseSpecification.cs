@@ -19,7 +19,7 @@ namespace Catalog.Core.Specs
 
         protected void AddFilter(FilterDefinition<T> filter)
         {
-            if (Filter != Builders<T>.Filter.Empty)
+            if (filter != Builders<T>.Filter.Empty)
                 Filter = Builders<T>.Filter.And(Filter, filter);
         }
 

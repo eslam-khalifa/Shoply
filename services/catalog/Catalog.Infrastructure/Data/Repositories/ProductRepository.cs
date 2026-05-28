@@ -1,5 +1,6 @@
 ﻿using Catalog.Core.Entities;
 using Catalog.Core.Repositories;
+using Catalog.Core.Specs;
 using Catalog.Infrastructure.Data.Contexts;
 using MongoDB.Bson;
 using MongoDB.Driver;
@@ -37,9 +38,18 @@ namespace Catalog.Infrastructure.Data.Repositories
 
         // repsoitories returns ienumerable because it is a type of abstraction and flexibility
         // any preprocessing method should return ienumerable
-        public async Task<IEnumerable<Product>> GetAllAsync()
+        public async Task<PagedResult<Product>> GetAllAsync(CatalogSpecParams catalogSpecParams)
         {
-            return await catalogContext.Products.Find(_ => true).ToListAsync();
+            var spec = new ProductSpecification(catalogSpecParams);
+            var query = SpecificationEvaluator<Product>.GetQuery(catalogContext.Products, spec);
+            var count = await catalogContext.Products.CountDocumentsAsync(_ => true);
+            var items = await query.ToListAsync();
+            return new PagedResult<Product>{
+                PageIndex = catalogSpecParams.PageIndex,
+                PageSize = catalogSpecParams.PageSize,
+                TotalCount = (int)count,
+                Data = items
+            };
         }
 
         public async Task<IEnumerable<Product>> GetAllByBrandNameAsync(string name)

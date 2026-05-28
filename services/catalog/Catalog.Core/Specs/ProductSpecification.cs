@@ -25,7 +25,7 @@ namespace Catalog.Core.Specs
             if (!string.IsNullOrEmpty(spec.Search))
             {
                 AddFilter(filter.Text(spec.Search));
-                ApplySort(sort.MetaTextScore("textScore"));
+                ApplySort(sort.MetaTextScore("score"));
             }
             else
                 ApplySort(spec.Sort switch

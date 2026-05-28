@@ -8,16 +8,16 @@ namespace Catalog.Core.Specs
 {
     public class PagedResult<T> where T : class
     {
-        public int PageIndex { get; set; }
-        public int PageSize { get; set; }
-        public int Count { get; set; }
-        public IReadOnlyList<T> Data { get; set; }
+        public int PageIndex { get; set; } = 1;
+        public int PageSize { get; set; } = 10;
+        public int TotalCount { get; set; }
+        public IReadOnlyList<T?> Data { get; set; }
 
         public PagedResult(int pageIndex, int pageSize, int count, IReadOnlyList<T> data)
         {
             PageIndex = pageIndex;
             PageSize = pageSize;
-            Count = count;
+            TotalCount = count;
             Data = data;
         }
 
