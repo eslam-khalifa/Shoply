@@ -13,6 +13,10 @@ namespace Catalog.Infrastructure.Data.Contexts
     {
         public static async Task SeedDataAsync(IMongoCollection<Product> productCollection)
         {
+            var indexModel = new CreateIndexModel<Product>(
+                Builders<Product>.IndexKeys.Text(p => p.Name)
+            );
+
             var hasProducts = await productCollection.Find(_ => true).AnyAsync();
             if (hasProducts)
                 return;

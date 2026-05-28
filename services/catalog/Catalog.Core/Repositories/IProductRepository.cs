@@ -1,4 +1,5 @@
 ﻿using Catalog.Core.Entities;
+using Catalog.Core.Specs;
 using System;
 using System.Collections.Generic;
 using System.Linq;
