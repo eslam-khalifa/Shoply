@@ -6,25 +6,23 @@ services:
       context: .
       dockerfile: services/catalog/Catalog.API/Dockerfile
     ports:
-    - "8000:8080"
+      - "8000:8080"
     depends_on:
-    - CatalogDb
+      - CatalogDb
     environment:
-    - ASPNETCORE_URLS=http://+:8080
-    - ASPNETCORE_ENVIRONMENT=Development
-    - DatabaseSettings__ConnectionString=mongodb://CatalogDb:27017
-    - DatabaseSettings__DatabaseName=CatalogDb
-    - DatabaseSettings__ProductBrandsCollectionName=Brands
-    - DatabaseSettings__ProductTypesCollectionName=Types
-    - DatabaseSettings__ProductsCollectionName=Products
-    
+      - ASPNETCORE_URLS=http://+:8080
+      - ASPNETCORE_ENVIRONMENT=Development
+      - DatabaseSettings__ConnectionString=mongodb://CatalogDb:27017
+      - DatabaseSettings__DatabaseName=CatalogDb
+      - DatabaseSettings__ProductBrandsCollectionName=Brands
+      - DatabaseSettings__ProductTypesCollectionName=Types
+      - DatabaseSettings__ProductsCollectionName=Products
   CatalogDb:
     image: mongo
     container_name: CatalogDb
     ports:
-    - "27017:27017"
+      - "27017:27017"
     volumes:
-    - catalogdata:/data/db
-
+      - catalogdata:/data/db
 volumes:
   catalogdata:
