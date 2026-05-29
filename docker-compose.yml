@@ -6,13 +6,13 @@ services:
       context: .
       dockerfile: services/catalog/Catalog.API/Dockerfile
     ports:
-      - "8000:8080"
+      - "8080:8080"
     depends_on:
       - CatalogDb
     environment:
       - ASPNETCORE_URLS=http://+:8080
       - ASPNETCORE_ENVIRONMENT=Development
-      - DatabaseSettings__ConnectionString=mongodb://CatalogDb:27017
+      - DatabaseSettings__ConnectionString=mongodb://CatalogDb:27018
       - DatabaseSettings__DatabaseName=CatalogDb
       - DatabaseSettings__ProductBrandsCollectionName=Brands
       - DatabaseSettings__ProductTypesCollectionName=Types
