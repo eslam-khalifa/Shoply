@@ -6,12 +6,14 @@ USER $APP_UID
 WORKDIR /app
 EXPOSE 8080
 
-
 # This stage is used to build the service project
 FROM mcr.microsoft.com/dotnet/sdk:9.0 AS build
 ARG BUILD_CONFIGURATION=Release
 WORKDIR /src
 COPY ["services/basket/Basket.Api/Basket.Api.csproj", "services/basket/Basket.Api/"]
+COPY ["services/basket/Basket.Application/Basket.Application.csproj", "services/basket/Basket.Application/"]
+COPY ["services/basket/Basket.Core/Basket.Core.csproj", "services/basket/Basket.Core/"]
+COPY ["services/basket/Basket.Infrastructure/Basket.Infrastructure.csproj", "services/basket/Basket.Infrastructure/"]
 RUN dotnet restore "./services/basket/Basket.Api/Basket.Api.csproj"
 COPY . .
 WORKDIR "/src/services/basket/Basket.Api"

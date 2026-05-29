@@ -6,13 +6,13 @@ services:
       context: .
       dockerfile: services/catalog/Catalog.API/Dockerfile
     ports:
-      - "8080:8080"
+      - "8000:8000"
     depends_on:
       - CatalogDb
     environment:
-      - ASPNETCORE_URLS=http://+:8080
+      - ASPNETCORE_URLS=http://+:8000
       - ASPNETCORE_ENVIRONMENT=Development
-      - DatabaseSettings__ConnectionString=mongodb://CatalogDb:27018
+      - DatabaseSettings__ConnectionString=mongodb://CatalogDb:27017
       - DatabaseSettings__DatabaseName=CatalogDb
       - DatabaseSettings__ProductBrandsCollectionName=Brands
       - DatabaseSettings__ProductTypesCollectionName=Types
@@ -24,5 +24,24 @@ services:
       - "27018:27017"
     volumes:
       - catalogdata:/data/db
+  basket.api:
+    image: ${DOCKER_REGISTRY-}basketapi
+    build:
+      context: .
+      dockerfile: services/basket/Basket.API/Dockerfile
+    ports:
+      - "8001:8000"
+    depends_on:
+      - BasketDb
+    environment:
+      - ASPNETCORE_URLS=http://+:8000
+      - ASPNETCORE_ENVIRONMENT=Development
+      - CacheSettings__ConnectionString=BasketDb:6379
+  BasketDb:
+    image: redis:alpine
+    container_name: BasketDb
+    restart: always
+    ports:
+      - "6380:6379"
 volumes:
   catalogdata:

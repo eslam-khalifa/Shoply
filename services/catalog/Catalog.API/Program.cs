@@ -67,8 +67,6 @@ namespace Catalog.API
                 app.UseSwaggerUI();
             }
 
-            app.UseHttpsRedirection();
-
             app.UseAuthorization();
 
 
