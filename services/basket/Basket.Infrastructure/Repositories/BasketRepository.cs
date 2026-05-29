@@ -20,7 +20,7 @@ namespace Basket.Infrastructure.Repositories
             this.redisCache = redisCache;
         }
 
-        public async Task DeleteBasket(string userName)
+        public async Task DeleteBasketAsync(string userName)
         {
             var basket = await redisCache.GetStringAsync(userName);
             if (basket is not null)

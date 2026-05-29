@@ -24,6 +24,20 @@ namespace Basket.Application.Mappers
             };
         }
 
+        public static ShoppingCartItem? ToShoppingCartItem(this ShoppingCartItemResponse shoppingCartItemResponse)
+        {
+            if (shoppingCartItemResponse is null)
+                return null;
+            return new ShoppingCartItem
+            {
+                ProductId = shoppingCartItemResponse.ProductId,
+                ProductImageUrl = shoppingCartItemResponse.ProductImageUrl,
+                ProductName = shoppingCartItemResponse.ProductName,
+                Quantity = shoppingCartItemResponse.Quantity,
+                UnitPrice = shoppingCartItemResponse.UnitPrice
+            };
+        }
+
         public static ShoppingCartResponse? ToShoppingCartResponse(this ShoppingCart shoppingCart)
         {
             if (shoppingCart is null)
@@ -32,6 +46,17 @@ namespace Basket.Application.Mappers
             {
                 UserName = shoppingCart.UserName,
                 Items = shoppingCart.Items.Select(sci => sci?.ToShoppingCartItemResponse()).ToList()
+            };
+        }
+
+        public static ShoppingCart? ToShoppingCart(this ShoppingCartResponse shoppingCartResponse)
+        {
+            if (shoppingCartResponse is null)
+                return null;
+            return new ShoppingCart
+            {
+                UserName = shoppingCartResponse.UserName,
+                Items = shoppingCartResponse.Items.Select(sci => sci?.ToShoppingCartItem()).ToList()
             };
         }
     }
