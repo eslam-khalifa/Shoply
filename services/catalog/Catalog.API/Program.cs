@@ -62,6 +62,7 @@ namespace Catalog.API
             if (app.Environment.IsDevelopment())
             {
                 app.MapOpenApi();
+                app.UseDeveloperExceptionPage();
                 app.UseSwagger();
                 app.UseSwaggerUI();
             }
